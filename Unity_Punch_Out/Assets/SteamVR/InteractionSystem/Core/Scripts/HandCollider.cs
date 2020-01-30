@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using Valve.VR.InteractionSystem;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -12,10 +13,9 @@ namespace Valve.VR.InteractionSystem
 
         public LayerMask collisionMask;
 
-        Collider[] colliders;
+        Collider[] colliders;       
 
-
-        public FingerColliders fingerColliders;
+        public FingerColliders fingerColliders;        
 
         [System.Serializable]
         public class FingerColliders
@@ -73,16 +73,17 @@ namespace Valve.VR.InteractionSystem
 
         private static PhysicMaterial physicMaterial_lowfriction;
         private static PhysicMaterial physicMaterial_highfriction;
-
+        
         private void Awake()
         {
             rigidbody = GetComponent<Rigidbody>();
             rigidbody.maxAngularVelocity = 50;
+            //dimple.GetComponent<DimpleController>();
         }
 
         private void Start()
         {
-            colliders = GetComponentsInChildren<Collider>();
+            colliders = GetComponentsInChildren<Collider>();            
 
             if (physicMaterial_lowfriction == null)
             {
@@ -206,8 +207,6 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
-
-
         protected bool GetTargetVelocities(out Vector3 velocityTarget, out Vector3 angularTarget)
         {
             bool realNumbers = false;
@@ -255,12 +254,24 @@ namespace Valve.VR.InteractionSystem
         const float minCollisionHapticsTime = 0.2f;
         private float lastCollisionHapticsTime;
         private void OnCollisionEnter(Collision collision)
-        {
+        {            
+            DimpleController dimple = collision.transform.GetComponent<DimpleController>();
             bool touchingDynamic = false;
-            if (collision.rigidbody != null)
+
+            if(collision.gameObject.name == "Dimples")
             {
-                if (collision.rigidbody.isKinematic == false) touchingDynamic = true;
+                //dimple.GetPunched();
             }
+
+            if (collision.rigidbody != null)
+            {                
+                if (collision.rigidbody.isKinematic == false)
+                {
+                    touchingDynamic = true;
+                }                
+            }
+
+            //Debug.Log(collision.gameObject);
 
             // low friction if touching static object, high friction if touching dynamic
             SetPhysicMaterial(touchingDynamic ? physicMaterial_highfriction : physicMaterial_lowfriction);
