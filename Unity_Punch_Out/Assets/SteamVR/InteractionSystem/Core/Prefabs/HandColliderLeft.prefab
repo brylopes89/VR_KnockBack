@@ -728,19 +728,19 @@ MonoBehaviour:
     thumbColliders:
     - {fileID: 4000011150399860}
     indexColliders:
-    - {fileID: 4000012050390454}
-    - {fileID: 4000012962541566}
     - {fileID: 4000010748827216}
+    - {fileID: 4000012962541566}
+    - {fileID: 4000012050390454}
     middleColliders:
-    - {fileID: 4000014196080978}
-    - {fileID: 4000010973331830}
     - {fileID: 4000012995160158}
+    - {fileID: 4000010973331830}
+    - {fileID: 4000014196080978}
     ringColliders:
-    - {fileID: 4000010317872206}
     - {fileID: 4000012765033070}
+    - {fileID: 4000010317872206}
     pinkyColliders:
-    - {fileID: 4000014174024032}
     - {fileID: 4000013920263390}
+    - {fileID: 4000014174024032}
   collidersInRadius: 0
 --- !u!54 &54000013135273658
 Rigidbody:

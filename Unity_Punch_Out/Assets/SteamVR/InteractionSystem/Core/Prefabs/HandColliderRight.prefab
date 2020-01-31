@@ -543,19 +543,19 @@ MonoBehaviour:
     thumbColliders:
     - {fileID: 4000011285245488}
     indexColliders:
-    - {fileID: 4000013412041440}
-    - {fileID: 4000011395390148}
     - {fileID: 4000013451019918}
+    - {fileID: 4000011395390148}
+    - {fileID: 4000013412041440}
     middleColliders:
-    - {fileID: 4000011705022212}
-    - {fileID: 4000011043040146}
     - {fileID: 4000010144325770}
+    - {fileID: 4000011043040146}
+    - {fileID: 4000011705022212}
     ringColliders:
-    - {fileID: 4000012017003156}
     - {fileID: 4000014054176190}
+    - {fileID: 4000012017003156}
     pinkyColliders:
-    - {fileID: 4000011596294980}
     - {fileID: 4000013046992402}
+    - {fileID: 4000011596294980}
   collidersInRadius: 0
 --- !u!54 &54000012734507470
 Rigidbody:

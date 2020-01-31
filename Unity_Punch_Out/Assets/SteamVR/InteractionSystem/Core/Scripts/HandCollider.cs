@@ -78,12 +78,12 @@ namespace Valve.VR.InteractionSystem
         {
             rigidbody = GetComponent<Rigidbody>();
             rigidbody.maxAngularVelocity = 50;
-            //dimple.GetComponent<DimpleController>();
+            
         }
 
         private void Start()
         {
-            colliders = GetComponentsInChildren<Collider>();            
+            colliders = GetComponentsInChildren<Collider>();
 
             if (physicMaterial_lowfriction == null)
             {
@@ -108,6 +108,12 @@ namespace Valve.VR.InteractionSystem
             SetPhysicMaterial(physicMaterial_lowfriction);
 
             scale = SteamVR_Utils.GetLossyScale(hand.transform);
+
+        } 
+        void FixedUpdate()
+        {
+           
+            
         }
 
         void SetPhysicMaterial(PhysicMaterial mat)
@@ -254,29 +260,28 @@ namespace Valve.VR.InteractionSystem
         const float minCollisionHapticsTime = 0.2f;
         private float lastCollisionHapticsTime;
         private void OnCollisionEnter(Collision collision)
-        {            
-            DimpleController dimple = collision.transform.GetComponent<DimpleController>();
+        {         
             bool touchingDynamic = false;
-
-            if(collision.gameObject.name == "Dimples")
-            {
-                //dimple.GetPunched();
-            }
-
+            DimpleController dimples = collision.gameObject.GetComponent<DimpleController>();
+            
             if (collision.rigidbody != null)
-            {                
+            {
+                if (collision.gameObject.tag == "Dimple")
+                {
+                    dimples.GetPunched();
+                }                         
+
                 if (collision.rigidbody.isKinematic == false)
                 {
                     touchingDynamic = true;
                 }                
             }
 
-            //Debug.Log(collision.gameObject);
+            Debug.Log(collision.gameObject);
+            
 
             // low friction if touching static object, high friction if touching dynamic
             SetPhysicMaterial(touchingDynamic ? physicMaterial_highfriction : physicMaterial_lowfriction);
-
-
 
             float energy = collision.relativeVelocity.magnitude;
 
