@@ -1,24 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class DimpleController : MonoBehaviour
 {
+    public HandPhysics rightHand;
+    private Collider[] rightColliders;
+    List<Collider> rightColliderList = new List<Collider>();
+
     // Start is called before the first frame update
     void Start()
     {
-        SetRigidBodyState(true);
-        SetColliderState(false);
-        GetComponent<Collider>().enabled = true;
-    }
+        //SetRigidBodyState(true);
+        //SetColliderState(false);
 
+        GetComponent<Collider>().enabled = true;       
+    }
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
-    //private void OnCollisionEnter(Collision col) //
+    private void OnTriggerEnter(Collider col)
+    {
+        foreach (Collider rightCollider in rightColliders)
+        {
+            if (col == rightCollider)
+            {
+                GetPunched();
+                Debug.Log(col.gameObject);
+            }
+        }      
+    }
+
     public void GetPunched()
     {
         StartCoroutine(PunchAnim());

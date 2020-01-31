@@ -113,7 +113,7 @@ namespace Valve.VR.InteractionSystem
         void FixedUpdate()
         {
            
-            
+           
         }
 
         void SetPhysicMaterial(PhysicMaterial mat)
@@ -157,6 +157,8 @@ namespace Valve.VR.InteractionSystem
             //also update transform in case physics is disabled
             transform.position = position;
             transform.rotation = rotation;
+            
+            
         }
 
         public void Reset()
@@ -261,16 +263,15 @@ namespace Valve.VR.InteractionSystem
         private float lastCollisionHapticsTime;
         private void OnCollisionEnter(Collision collision)
         {         
-            bool touchingDynamic = false;
-            DimpleController dimples = collision.gameObject.GetComponent<DimpleController>();
-            
+            bool touchingDynamic = false;            
+
+            if (collision.gameObject.tag == "Dimple")
+            {
+                //dimples.GetPunched();
+            }
+
             if (collision.rigidbody != null)
             {
-                if (collision.gameObject.tag == "Dimple")
-                {
-                    dimples.GetPunched();
-                }                         
-
                 if (collision.rigidbody.isKinematic == false)
                 {
                     touchingDynamic = true;
