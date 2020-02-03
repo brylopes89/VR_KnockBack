@@ -32,7 +32,6 @@ namespace Valve.VR.InteractionSystem
 
         private bool collisionsEnabled = true;
 
-
         private void Start()
         {
             hand = GetComponent<Hand>();

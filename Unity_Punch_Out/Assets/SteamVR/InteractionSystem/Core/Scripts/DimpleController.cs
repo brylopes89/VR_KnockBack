@@ -6,70 +6,61 @@ using Valve.VR.InteractionSystem;
 public class DimpleController : MonoBehaviour
 {
     public HandPhysics rightHand;
-    private Collider[] rightColliders;
-    List<Collider> rightColliderList = new List<Collider>();
-
+    public HandPhysics leftHand;    
+    
+    private int animHashID;
+    private Animator anim;
+    private string hitDirection;
     // Start is called before the first frame update
     void Start()
-    {
-        //SetRigidBodyState(true);
-        //SetColliderState(false);
-
-        GetComponent<Collider>().enabled = true;       
+    {    
+        anim = GetComponent<Animator>();       
     }
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     private void OnTriggerEnter(Collider col)
-    {
-        foreach (Collider rightCollider in rightColliders)
+    {          
+        if (col.gameObject.CompareTag("PlayerHand"))
         {
-            if (col == rightCollider)
-            {
-                GetPunched();
-                Debug.Log(col.gameObject);
-            }
-        }      
-    }
-
-    public void GetPunched()
-    {
-        StartCoroutine(PunchAnim());
-        //SetRigidBodyState(false);
-        //SetColliderState(true);
-        // Debug.Log(col.gameObject);                        
-    }
-    private IEnumerator PunchAnim()
-    {
-        GetComponent<Animator>().SetBool("isRightHit", true);
-        yield return new WaitForSeconds(.1f);
-        GetComponent<Animator>().SetBool("isRightHit", false);
-    }
-    void SetRigidBodyState(bool state)
-    {
-        Rigidbody[] rigidbodies = GetComponentsInChildren<Rigidbody>();
-
-        foreach(Rigidbody rigidBody in rigidbodies)
-        {
-            rigidBody.isKinematic = state;
+            Debug.Log("Hit By" + col.gameObject);
+            hitDirection = DirectionImpact(col.transform.position);
+            StartCoroutine(ImpactAnim(hitDirection));
         }
-
-        //GetComponent<Rigidbody>().isKinematic = !state;
+       
     }
-
-    void SetColliderState(bool state)
+    private IEnumerator ImpactAnim(string boolName)
+    {        
+        animHashID = Animator.StringToHash(boolName);
+        //anim.SetTrigger(animHashID);
+        anim.SetBool(animHashID, true);
+        yield return new WaitForEndOfFrame();
+        anim.SetBool(boolName, false);      
+    }
+ 
+    string DirectionImpact(Vector3 OtherObject)
     {
-        Collider[] colliders= GetComponentsInChildren<Collider>();
+        string front;
+        string right;
+        //string direction;
+        float tolerance = 0.1f;
 
-        foreach (Collider collider in colliders)
-        {
-            collider.enabled = state;
-        }
+        if (Vector3.Dot(transform.forward, OtherObject - transform.position) >= tolerance)
+            front = "isForward";
+        else
+            front = "isForward";        
 
-       // GetComponent<Collider>().enabled = !state;
+        if (Vector3.Dot(transform.right, OtherObject - transform.position) < -tolerance)
+            right = "LeftJab";
+        else if (Vector3.Dot(transform.right, OtherObject - transform.position) > tolerance)
+            right = "RightJab";
+        else
+            right = "Jab";
+
+        return front + right;
     }
 }
 

@@ -267,7 +267,7 @@ namespace Valve.VR.InteractionSystem
 
             if (collision.gameObject.tag == "Dimple")
             {
-                //dimples.GetPunched();
+                
             }
 
             if (collision.rigidbody != null)
@@ -276,10 +276,7 @@ namespace Valve.VR.InteractionSystem
                 {
                     touchingDynamic = true;
                 }                
-            }
-
-            Debug.Log(collision.gameObject);
-            
+            }           
 
             // low friction if touching static object, high friction if touching dynamic
             SetPhysicMaterial(touchingDynamic ? physicMaterial_highfriction : physicMaterial_lowfriction);
