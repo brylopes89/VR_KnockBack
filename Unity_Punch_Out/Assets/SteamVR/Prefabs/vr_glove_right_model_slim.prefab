@@ -999,31 +999,32 @@ MonoBehaviour:
   poseEditorExpanded: 1
   blendEditorExpanded: 1
   poseNames:
-  - fallback_relaxed (MAIN)
+  - fallback_fist (MAIN)
   - fallback_point
-  - fallback_fist
-  overridePreviewLeftHandPrefab: {fileID: 0}
-  overridePreviewRightHandPrefab: {fileID: 0}
-  skeletonMainPose: {fileID: 11400000, guid: 213b7d69786635c498d1287c5505990e, type: 2}
+  - fallback_relaxed
+  overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
+    type: 3}
+  overridePreviewRightHandPrefab: {fileID: 1000010304998954}
+  skeletonMainPose: {fileID: 11400000, guid: 45a635d0e1a43f14da0eb032aeb8dbcd, type: 2}
   skeletonAdditionalPoses:
   - {fileID: 11400000, guid: 416ca9f76f309e5478daf527e55b0c80, type: 2}
-  - {fileID: 11400000, guid: 45a635d0e1a43f14da0eb032aeb8dbcd, type: 2}
+  - {fileID: 11400000, guid: 213b7d69786635c498d1287c5505990e, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
   previewPoseSelection: 0
   blendingBehaviours:
-  - name: point
+  - name: fist
     enabled: 1
     influence: 1
-    pose: 1
+    pose: 2
     value: 0
     action_single:
       actionPath: 
       needsReinit: 0
     action_bool:
-      actionPath: /actions/default/in/GrabGrip
+      actionPath: /actions/default/in/GrabPinch
       needsReinit: 0
     smoothingSpeed: 16
     type: 2
@@ -1037,16 +1038,16 @@ MonoBehaviour:
       pinky: 1
       values: 010101010101
     previewEnabled: 1
-  - name: fist
+  - name: point
     enabled: 1
     influence: 1
-    pose: 2
+    pose: 1
     value: 0
     action_single:
       actionPath: 
       needsReinit: 0
     action_bool:
-      actionPath: /actions/default/in/GrabPinch
+      actionPath: /actions/default/in/GrabGrip
       needsReinit: 0
     smoothingSpeed: 16
     type: 2

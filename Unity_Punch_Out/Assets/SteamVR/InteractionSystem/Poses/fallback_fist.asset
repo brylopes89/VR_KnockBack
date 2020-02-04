@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: fallback_fist
   m_EditorClassIdentifier: 
   leftHand:
-    inputSource: 1
+    inputSource: 0
     thumbFingerMovementType: 0
     indexFingerMovementType: 0
     middleFingerMovementType: 0
